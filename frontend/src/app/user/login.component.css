@@ -1,0 +1,15 @@
+.invalid {
+  border: 3px solid red !important;
+  color: red !important;
+}
+em {
+  float: right;
+  color: #E05C65;
+  padding-left: 10px;
+}
+
+.btnvalidate {
+  float: left;
+  color: #E05C65;
+  padding-left: 10px;
+}

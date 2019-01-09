@@ -2,8 +2,8 @@ import { Injectable } from '@angular/core'
 import { IUser, IAuth } from './user.model'
 import { HttpClient, HttpHeaders } from '@angular/common/http'
 import { finalize } from 'rxjs/operators'
-import { Router } from '@angular/router';
-import { Observable } from 'rxjs';
+import { Router } from '@angular/router'
+import { Observable } from 'rxjs'
 
 @Injectable()
 export class AuthService {
@@ -41,16 +41,16 @@ export class AuthService {
   }
 
   logout(): void {
-      this.http.post('logout', {}).pipe(
-        finalize(() => {
-          this.authenticated = false;
-          this.router.navigateByUrl('/login');
-        })
-      ).subscribe();
-    }
+    this.http.post('logout', {}).pipe(
+      finalize(() => {
+        this.authenticated = false
+        this.router.navigateByUrl('/login')
+      })
+    ).subscribe()
+  }
 
   isAuthenticated(): Observable<IUser> {
-    return this.http.get<IUser>('api/v1/user');
+    return this.http.get<IUser>('api/v1/user')
   }
 
 }

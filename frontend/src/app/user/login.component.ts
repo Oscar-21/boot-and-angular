@@ -8,7 +8,7 @@ import { AuthService } from './auth.service'
 })
 export class LoginComponent {
 
-  credentials = { username: '', password: '' };
+  credentials = { username: '', password: '' }
 
   constructor(
     private authService: AuthService,
@@ -18,9 +18,9 @@ export class LoginComponent {
 
   login() {
     this.authService.authenticate(this.credentials, () => {
-      this.router.navigateByUrl('/events');
-    });
-    return false;
+      this.router.navigateByUrl('/events')
+    })
+    return false
   }
 
 }

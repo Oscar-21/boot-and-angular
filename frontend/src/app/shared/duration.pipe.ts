@@ -1,5 +1,5 @@
-import { Pipe, PipeTransform, Injectable, NgModule } from "@angular/core";
-// import { CommonModule } from "@angular/common";
+import { Pipe, PipeTransform, Injectable, NgModule } from '@angular/core'
+// import { CommonModule } from '@angular/common'
 
 @Pipe({ name: 'duration' })
 export class DurationPipe implements PipeTransform {

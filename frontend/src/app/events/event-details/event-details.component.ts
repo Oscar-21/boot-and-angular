@@ -1,7 +1,10 @@
-import { Component, OnInit } from '@angular/core'
-import { IEvent, ISession } from '../shared/event.model';
-import { ActivatedRoute, Data } from '@angular/router';
-import { EventService } from '../shared';
+import { Component, OnInit, OnDestroy } from '@angular/core'
+import { IEvent, ISession } from '../shared/event.model'
+import { EventService } from '../shared'
+import { Store, select } from '@ngrx/store';
+import { State } from '../state/event.state';
+import { getCurrentEvent } from '../state/event.selectors';
+import { Observable, Subscription } from 'rxjs';
 
 @Component({
   'selector': 'event-details',
@@ -15,23 +18,33 @@ import { EventService } from '../shared';
     a { cursor: pointer }
   `]
 })
-export class EventDetailsComponent implements OnInit {
+export class EventDetailsComponent implements OnInit, OnDestroy {
 
-  conferenceEvent: IEvent
+  selectedEvent$: Observable<IEvent>
+  conferenceEvent: IEvent | null
+  sub: Subscription
   addMode: boolean
   filterBy = 'all'
   sortBy = 'votes'
 
   constructor(
     private eventService: EventService,
-    private activatedRoute: ActivatedRoute) {
+    private store$: Store<State>) {
   }
 
   ngOnInit(): void {
-    this.activatedRoute.data.forEach((data: Data) => {
-      this.conferenceEvent = data['conferenceEvent']
-      this.addMode = false
-    })
+    this.selectedEvent$ = this.store$.pipe(select(getCurrentEvent))
+    this.sub = this.selectedEvent$.subscribe(
+      event => {
+        console.log(`ce ${event}`)
+        this.conferenceEvent = event
+      },
+      err => console.log(`error EventDetailsComponent: ${err}`)
+    )
+  }
+
+  ngOnDestroy(): void {
+    this.sub.unsubscribe()
   }
 
   addSession(): void {

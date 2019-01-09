@@ -1,9 +1,9 @@
-import { Component, Input, OnChanges, OnInit, OnDestroy } from "@angular/core";
-import { ISession } from "../shared/event.model";
-import { AuthService } from "src/app/user/auth.service";
-import { VotingService } from "./voting.service";
-import { IUser } from "src/app/user/user.model";
-import { Subscription } from "rxjs";
+import { Component, Input, OnChanges, OnInit, OnDestroy } from '@angular/core'
+import { ISession } from '../shared/event.model'
+import { AuthService } from 'src/app/user/auth.service'
+import { VotingService } from './voting.service'
+import { IUser } from 'src/app/user/user.model'
+import { Subscription } from 'rxjs'
 
 @Component({
   selector: 'session-list',
@@ -26,7 +26,7 @@ export class SessionListComponent implements OnInit, OnChanges, OnDestroy {
 
   ngOnInit(): void {
     this.sub = this.authService.isAuthenticated().subscribe(
-      (user:IUser) => this.currentUser = user
+      (user: IUser) => this.currentUser = user
     )
   }
 

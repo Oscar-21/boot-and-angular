@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component } from '@angular/core'
 
 @Component({
   selector: 'events-app',
@@ -8,5 +8,5 @@ import { Component } from '@angular/core';
   `,
 })
 export class EventsAppComponent {
-  title = 'app';
+  title = 'app'
 }

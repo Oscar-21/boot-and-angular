@@ -1,6 +1,6 @@
 import { Route } from '@angular/router'
-import { Error404Component } from './errors/404.component';
-import { FooComponent } from './foo/foo.component';
+import { Error404Component } from './errors/404.component'
+import { FooComponent } from './foo/foo.component'
 
 export const appRoutes: Route[] = [{
   path: '',

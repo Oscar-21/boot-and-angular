@@ -1,17 +1,16 @@
-import { CreateEventComponent } from "./create-event.component";
-import { EventDetailsComponent, CreateSessionComponent, EventRouteActivator } from "./event-details";
-import { EventDetailResolver } from "./event-detail-resolver.service";
-import { Route } from "@angular/router";
-import { EventListResolver } from "./event-list-resolver.service";
-import { EventsListComponent } from "./events-list.component";
+import { CreateEventComponent } from './create-event.component'
+import {
+  EventDetailsComponent,
+  CreateSessionComponent,
+  EventRouteActivator
+} from './event-details'
+import { Route } from '@angular/router'
+import { EventsShellComponent } from './events-shell.component'
 
 export const eventRoutes: Route[] = [{
   path: '',
   pathMatch: 'full',
-  component: EventsListComponent,
-  resolve: {
-    events: EventListResolver
-  }
+  component: EventsShellComponent
 }, {
   path: 'new',
   component: CreateEventComponent,
@@ -19,10 +18,7 @@ export const eventRoutes: Route[] = [{
 }, {
   path: ':id',
   component: EventDetailsComponent,
-  resolve: {
-    conferenceEvent: EventDetailResolver
-  },
-  canActivate: [EventRouteActivator]
+  canActivate: [ EventRouteActivator ]
 }, {
   path: 'session/new',
   component: CreateSessionComponent,

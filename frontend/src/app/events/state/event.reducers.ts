@@ -1,20 +1,28 @@
-import { defaultEventState, EventState } from "./event.state";
-import { EventActions, EventActionTypes } from "./event.actions";
+import { initialState, EventState } from './event.state'
+import { EventActions, EventActionTypes } from './event.actions'
 
 export function reducer(
-  state = defaultEventState,
+  state = initialState,
   action: EventActions
 ): EventState {
 
   switch (action.type) {
 
-    case (EventActionTypes.LOAD_SUCCESS):
+    case EventActionTypes.LOAD_SUCCESS:
       return {
         ...state,
-        events: action.payload
+        events: action.payload,
+        error: ''
+      }
+
+    case EventActionTypes.SET_CURRENT_EVENT:
+      return {
+        ...state,
+        currentId: action.payload.id,
+        error: ''
       }
 
     default:
-      return state;
+      return state
   }
 }

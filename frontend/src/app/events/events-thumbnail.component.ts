@@ -1,13 +1,16 @@
 import { Component, Input } from '@angular/core'
 import { IEvent } from './shared/event.model'
-import { Router } from '@angular/router';
+import { Router } from '@angular/router'
+import { Store } from '@ngrx/store';
+import * as eventActions from './state/event.actions'
+import { State } from './state/event.state'
 
 @Component({
   selector: 'events-thumbnail',
   template: `
     <div *ngIf="!!conferenceEvent"
          class="well hoverwell thumbnail"
-         [routerLink]="['/events', conferenceEvent.id ]">
+         (click)="eventSelected(conferenceEvent)">
       <h2>{{conferenceEvent.name | uppercase }}</h2>
       <div>Date: {{conferenceEvent.date.toDateString()}}</div>
       <div>Time: {{conferenceEvent.time}}</div>
@@ -37,7 +40,9 @@ export class EventsThumbnailComponent {
 
   @Input() conferenceEvent: IEvent
 
-  constructor(private router: Router) {
+  constructor(
+    private router: Router,
+    private store$: Store<State>) {
   }
 
   getStartTimeStyle() {
@@ -53,5 +58,10 @@ export class EventsThumbnailComponent {
 
   navigateToDetails(id: number): void {
     this.router.navigate([`/events/${id}`])
+  }
+
+  eventSelected(event: IEvent): void {
+    this.store$.dispatch(new eventActions.SetCurrentEvent(event))
+    this.navigateToDetails(event.id)
   }
 }

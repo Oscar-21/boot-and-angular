@@ -1,8 +1,8 @@
-import { Component, OnInit } from '@angular/core'
+import { Component, Input, Output } from '@angular/core'
 import { IEvent } from './shared/event.model'
-import { ActivatedRoute, Data } from '@angular/router'
 
 @Component({
+  selector: 'events-list',
   template: `
     <div>
       <h1>Upcoming Angpular Events</h1>
@@ -22,16 +22,9 @@ import { ActivatedRoute, Data } from '@angular/router'
     .notclicked { color: hotpink; }
   `]
 })
-export class EventsListComponent implements OnInit {
+export class EventsListComponent {
 
-  events: IEvent[]
+  @Input() events: IEvent[]
   buttonText = 'Click'
-
-  constructor(private route: ActivatedRoute) {
-  }
-
-  ngOnInit(): void {
-    this.route.data.forEach((data: Data) => this.events = data['events'])
-  }
 
 }
